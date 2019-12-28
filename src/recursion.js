@@ -7,11 +7,32 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+  if (n === 0){//base case
+    return 1;
+  }
+
+  if ( n < 0){
+    return null;
+  }
+  //multiply n * n-1
+  //total should equal n * n-1 the first time around
+  //then total should equal total * n
+  return n * factorial(n-1);
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+  //base case
+  //if the array only has one number, return that number
+  if(array.length === 0){
+    return 0;
+  }
+  //if it has more than 1 number, add together the first two numbers
+  else {
+    return array[0] + sum(array.slice(1));
+
+  }
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
@@ -21,17 +42,58 @@ var arraySum = function(array) {
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  //a number is even if it is divisible by 2
+  //if we subtract 2 until we get 0, that is the same as dividiing
+  //so we can keep subtracting 2 until we get to 0, that equals even
+  //and if we subtract 2 and get 1, then we know that it is odd
+
+  if(n===0){
+    return true;
+  }
+  if(n===1){
+    return false;
+  }
+  else {
+    return isEven(Math.abs(n)-2);
+  }
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  //add all the numbers below the given number, not including the given number
+  //if n = 10, 9 + 8 = 17, 17 + 7 = 24, and so on...
+  //similar to the sum function above
+ //basecase
+ if (n === 0){
+   return 0;
+ }
+  if(n>0){
+    return (n-1) + sumBelow(n-1);
+  }
+  else{
+    return (n+1) + sumBelow(n+1);
+  }
+  //return n + function(n-1);
 };
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+
+  var results = [];
+// if (x < y){
+  for(var i = x+1 ; i < y; i++ ){
+    results.push(i);
+  }
+// }
+// if (y < x){
+//   for(var i = x-1 ; i > y; i++){
+//     results.push(i);
+//   }
+// }
+ return results;
 };
 
 // 7. Compute the exponent of a number.
